@@ -8,7 +8,9 @@ Proje Python ile geliştirilmiştir. Kullanılan kütüphaneler:
 * `heapq`: A* algoritması için priority queue (öncelikli kuyruk) kullanımını sağlıyor.
 * `collections`: BFS algoritması için queue (kuyruk) yönetimini sağlıyor.
 * `typing`: Fonksiyonlarda tip belirtme (set,list,tuple vb.)
-
+* `networkx`: Metro ağını grafik olarak modellemek ve görselleştirmek için kullanıldı.
+* `matplotlib`: Metro ağını görselleştirmek için kullanıldı.
+  
 ## Algoritmaların Çalışma Mantığı
 
 1️⃣ BFS (Genişlik Öncelikli Arama) Algoritması
@@ -127,6 +129,19 @@ A* algoritması aşağıdaki durumda kullanışlıdır:
 * Daha az düğüm gezerek hedefe ulaşma süresini optimize eder.
 * Dijkstra'dan daha hızlıdır.
 
+## Metro Ağının Görselleştirilmesi
+<p> networkx ve matplotlib gibi kütüphaneler kullanılarak metro istasyonlarının bir grafik olarak çizilmesi sağlandı. Böylece kullanıcılar rotalarını görsel olarak takip edebilirler.</p>
+ Grafikte:
+🔹 İstasyonlar düğüm olarak gösterilir.
+🔹 İstasyonlar arası bağlantılar çizgilerle gösterilir.
+🔹 Farklı hatlar için örnek Kullanımda hatlar için belirtilen farklı renkler kullanılmıştır.
+
+```
+metro_gorsellestirme(metro)
+```
+![image](https://github.com/user-attachments/assets/03ebc3b6-0f40-4698-b849-725b4cf4ad35)
+* Görsel 1. Görselleştirme sonucu alınan çıktı.
+
 ## Örnek Kullanım ve Test Sonuçları
 
 ### Kod örneği:
@@ -142,4 +157,10 @@ En az aktarmalı rota: AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetevler ->
 En hızlı rota (25 dakika): AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetevler -> OSB 
 ```
 ## Projeyi Geliştirme Fikirleri:
+Bu projeye ek olarak yapılabilir olan geliştirmeler:
+✔ 'Networkx' ve 'Matplotlib' gibi kütüphaneler kullanılarak oluşturulan metro ağı haritası daha detaylı hale getirilerek görselleştirilmesi geliştirilebilir.
+✔ Tek bir en hızlı rota yerine, birkaç farklı rota sunarak yolcuların tercihlerine göre seçim yapmasına imkan tanınabilir (örneğin, en kısa süre, en az aktarma veya en az yürüyüş içeren rotalar).
+✔ Makine öğrenmesi teknikleri kullanılarak, geçmiş metro hareketleri analiz edilip tahmini varış süreleri iyileştirilebilir ve algoritmaların doğruluğu artırılabilir.
+✔ Kullanıcı dostu bir mobil uygulama entegrasyon sağlanarak, simülasyon gerçek zamanlı olarak daha etkileşimli bir hale getirilebilir.
 
+bu geliştirmeler, metro simülasyonunun günümüz koşullarını destekleyici, kullanıcı dostu ve gerçekçi bir sistem haline gelmesini sağlayabilir.
