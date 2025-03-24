@@ -1,6 +1,8 @@
 from collections import defaultdict, deque
 import heapq
 from typing import Dict, List, Set, Tuple, Optional
+import networkx as nx 
+import matplotlib.pyplot as plt
 
 class Istasyon:
     def __init__(self, idx: str, ad: str, hat: str):
@@ -83,6 +85,35 @@ class MetroAgi:
                     heapq.heappush(pq,(new_sure, id(komsu), komsu, rota + [komsu]))
         return None            
          
+def metro_gorsellestirme(metro: MetroAgi):
+    G = nx.Graph()
+        
+    for istasyon in metro.istasyonlar.values():
+        G.add_node(istasyon.idx, label = istasyon.ad, color=istasyon.hat)
+        
+    hat_color = {
+        "Kırmızı Hat" : "red",
+        "Mavi Hat" : "blue",
+        "Turuncu Hat" : "orange"
+    }    
+    
+    for istasyon in metro.istasyonlar.values():
+        for komsu, sure in istasyon.komsular:
+            G.add_edge(istasyon.idx, komsu.idx, weight=sure)
+
+    # Düğüm renklerini belirleme
+    renkler = [hat_color.get(G.nodes[n]["color"], "gray") for n in G.nodes]
+
+    # Grafiği çizdirme
+    plt.figure(figsize=(10, 6))
+    pos = nx.spring_layout(G, seed=42)  # Daha düzenli bir görüntü için düzenleme
+    nx.draw(G, pos, with_labels=True, node_color=renkler, edge_color="gray", node_size=2000, font_size=10)
+    
+    plt.title("Metro Ağı Görselleştirme")
+    plt.show()
+
+
+
 
 # Örnek Kullanım
 if __name__ == "__main__":
@@ -163,3 +194,5 @@ if __name__ == "__main__":
     if sonuc:
         rota, sure = sonuc
         print(f"En hızlı rota ({sure} dakika):", " -> ".join(i.ad for i in rota)) 
+        
+    metro_gorsellestirme(metro)    
