@@ -5,9 +5,9 @@
 
 Proje Python ile geliştirilmiştir. Kullanılan kütüphaneler:
 
-* `heapq`: A* algoritması için öncelikli kuyruk (priority queue)
-* `collections`: BFS algoritması için kuyruk (queue) yönetimi
-* `typing`: Fonksiyonlarda tip belirtimleri
+* `heapq`: A* algoritması için priority queue (öncelikli kuyruk) kullanımını sağlıyor.
+* `collections`: BFS algoritması için queue (kuyruk) yönetimini sağlıyor.
+* `typing`: Fonksiyonlarda tip belirtme (set,list,tuple vb.)
 
 ## Algoritmaların Çalışma Mantığı
 
@@ -37,10 +37,6 @@ A* algoritması, `gerçek maliyet (g) + tahmini maliyet (h) = toplam maliyet (f)
 3.  Komşular hesaplanarak en iyi (en düşük f) olanlar kuyruğa eklenir.
 4.  Hedefe ulaşıldığında, toplam süre ve en kısa rota döndürülür.
    
-**Avantajları:**
-
-* Hedefe ulaşma süresini optimize eder.
-* Dijkstra'dan daha hızlıdır.
 
 ## Neden A* Kullanıyoruz?
 
@@ -59,5 +55,6 @@ metro.en_hizli_rota_bul("M1", "K4")
 ### Örnek Çıktı:
 ```
 En az aktarmalı rota: AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetevler -> OSB
-En hızlı rota (25 dakika): AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetevler -> OSB
+En hızlı rota (25 dakika): AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetevler -> OSB 
 ```
+
