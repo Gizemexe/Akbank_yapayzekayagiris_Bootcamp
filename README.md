@@ -158,9 +158,9 @@ En hızlı rota (25 dakika): AŞTİ -> Kızılay -> Kızılay -> Ulus -> Demetev
 ```
 ## Projeyi Geliştirme Fikirleri:
 Bu projeye ek olarak yapılabilir olan geliştirmeler:
-✔ 'Networkx' ve 'Matplotlib' gibi kütüphaneler kullanılarak oluşturulan metro ağı haritası daha detaylı hale getirilerek görselleştirilmesi geliştirilebilir.
-✔ Tek bir en hızlı rota yerine, birkaç farklı rota sunarak yolcuların tercihlerine göre seçim yapmasına imkan tanınabilir (örneğin, en kısa süre, en az aktarma veya en az yürüyüş içeren rotalar).
-✔ Makine öğrenmesi teknikleri kullanılarak, geçmiş metro hareketleri analiz edilip tahmini varış süreleri iyileştirilebilir ve algoritmaların doğruluğu artırılabilir.
-✔ Kullanıcı dostu bir mobil uygulama entegrasyon sağlanarak, simülasyon gerçek zamanlı olarak daha etkileşimli bir hale getirilebilir.
+<p>✔ 'Networkx' ve 'Matplotlib' gibi kütüphaneler kullanılarak oluşturulan metro ağı haritası daha detaylı hale getirilerek görselleştirilmesi geliştirilebilir.</p>
+<p>✔ Tek bir en hızlı rota yerine, birkaç farklı rota sunarak yolcuların tercihlerine göre seçim yapmasına imkan tanınabilir (örneğin, en kısa süre, en az aktarma veya en az yürüyüş içeren rotalar).</p>
+<p>✔ Makine öğrenmesi teknikleri kullanılarak, geçmiş metro hareketleri analiz edilip tahmini varış süreleri iyileştirilebilir ve algoritmaların doğruluğu artırılabilir.</p>
+<p>✔ Kullanıcı dostu bir mobil uygulama entegrasyon sağlanarak, simülasyon gerçek zamanlı olarak daha etkileşimli bir hale getirilebilir.</p>
 
-bu geliştirmeler, metro simülasyonunun günümüz koşullarını destekleyici, kullanıcı dostu ve gerçekçi bir sistem haline gelmesini sağlayabilir.
+<p> Bu geliştirmeler, metro simülasyonunun günümüz koşullarını destekleyici, kullanıcı dostu ve gerçekçi bir sistem haline gelmesini sağlayabilir.</p>
