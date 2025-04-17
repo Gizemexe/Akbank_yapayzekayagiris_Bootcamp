@@ -10,7 +10,13 @@ Proje Python ile geliştirilmiştir. Kullanılan kütüphaneler:
 * `typing`: Fonksiyonlarda tip belirtme (set,list,tuple vb.)
 * `networkx`: Metro ağını grafik olarak modellemek ve görselleştirmek için kullanıldı.
 * `matplotlib`: Metro ağını görselleştirmek için kullanıldı.
-  
+
+Projeyi çalıştırmak için: 
+```
+pip install networkx matplotlib
+python GizemErol_MetroSimulation.py
+```
+
 ## Algoritmaların Çalışma Mantığı
 
 1️⃣ BFS (Genişlik Öncelikli Arama) Algoritması
