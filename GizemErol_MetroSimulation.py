@@ -54,66 +54,75 @@ class MetroAgi:
                     kuyruk.append((komsu, rota + [komsu])) # rota + [komsu] = yeni rotayı mevcut rotaya ekleyerek devam.
                     
         return None 
-               
-
 
     def en_hizli_rota_bul(self, baslangic_id: str, hedef_id: str) -> Optional[Tuple[List[Istasyon], int]]:
         if baslangic_id not in self.istasyonlar or hedef_id not in self.istasyonlar:
             return None
-
+        
+        def heuristic(mevcut: Istasyon, hedef: Istasyon) -> int:
+            # Eğer istasyonlar aynı hatta değilse 5 dakika ceza ver
+            return 5 if mevcut.hat != hedef.hat else 0
+        
         baslangic = self.istasyonlar[baslangic_id]
-        hedef = self.istasyonlar[hedef_id]
+        hedef = self.istasyonlar[hedef_id]    
         ziyaret_edildi = set()
         
-        pq = [(0, id(baslangic) ,baslangic, [baslangic])]
-        maliyet = {baslangic: 0}
+        g_maliyet = {baslangic: 0}  # g(n): şu ana kadar olan maliyet
+        pq = [(heuristic(baslangic, hedef), id(baslangic) ,baslangic, [baslangic])]
         
         while pq:
-            toplam_sure, istasyon_id, mevcut,rota = heapq.heappop(pq)
+            f_degeri, _, mevcut,rota = heapq.heappop(pq)
             
             if mevcut == hedef:
-                return rota, toplam_sure
+                return rota, g_maliyet[mevcut]
             
             if mevcut in ziyaret_edildi:
                 continue
             ziyaret_edildi.add(mevcut)
             
             for komsu, sure in mevcut.komsular: #A* algoritması 
-                new_sure = toplam_sure + sure
-                if komsu not in maliyet or new_sure < maliyet[komsu]: #En düşük süreye sahip rotayı seç
-                    maliyet[komsu] = new_sure
-                    heapq.heappush(pq,(new_sure, id(komsu), komsu, rota + [komsu]))
+                yeni_g  = g_maliyet[mevcut] + sure
+                if komsu not in g_maliyet or yeni_g  < g_maliyet[komsu]: #En düşük süreye sahip rotayı seç
+                    g_maliyet[komsu] = yeni_g 
+                    f_degeri = yeni_g + heuristic(komsu, hedef)  # f(n) = g(n) + h(n)
+                    heapq.heappush(pq,(f_degeri, id(komsu), komsu, rota + [komsu]))
         return None            
          
 def metro_gorsellestirme(metro: MetroAgi):
     G = nx.Graph()
-        
+
+    # Düğüm ekleme
     for istasyon in metro.istasyonlar.values():
-        G.add_node(istasyon.idx, label = istasyon.ad, color=istasyon.hat)
-        
+        G.add_node(istasyon.idx, label=istasyon.ad, color=istasyon.hat)
+
     hat_color = {
-        "Kırmızı Hat" : "red",
-        "Mavi Hat" : "blue",
-        "Turuncu Hat" : "orange"
-    }    
-    
+        "Kırmızı Hat": "red",
+        "Mavi Hat": "blue",
+        "Turuncu Hat": "orange"
+    }
+
+    # Kenarları ve süreleri ekle
     for istasyon in metro.istasyonlar.values():
         for komsu, sure in istasyon.komsular:
-            G.add_edge(istasyon.idx, komsu.idx, weight=sure)
+            if not G.has_edge(istasyon.idx, komsu.idx):
+                G.add_edge(istasyon.idx, komsu.idx, weight=sure)
 
-    # Düğüm renklerini belirleme
     renkler = [hat_color.get(G.nodes[n]["color"], "gray") for n in G.nodes]
+    labels = {node: G.nodes[node]["label"] for node in G.nodes}
+    edge_labels = nx.get_edge_attributes(G, 'weight')
 
-    # Grafiği çizdirme
-    plt.figure(figsize=(10, 6))
-    pos = nx.spring_layout(G, seed=42)  # Daha düzenli bir görüntü için düzenleme
-    nx.draw(G, pos, with_labels=True, node_color=renkler, edge_color="gray", node_size=2000, font_size=10)
-    
-    plt.title("Metro Ağı Görselleştirme")
+    plt.figure(figsize=(12, 8))
+    pos = nx.spring_layout(G, seed=42, k=0.3)  # Daha düzenli konumlandırma
+
+    nx.draw_networkx_nodes(G, pos, node_color=renkler, node_size=2500)
+    nx.draw_networkx_edges(G, pos, width=2.0, edge_color="gray")
+    nx.draw_networkx_labels(G, pos, labels, font_size=10, font_color="white")
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=edge_labels, font_color='black')
+
+    plt.title("Metro Ağı Görselleştirme", fontsize=16)
+    plt.axis('off')
+    plt.tight_layout()
     plt.show()
-
-
-
 
 # Örnek Kullanım
 if __name__ == "__main__":
